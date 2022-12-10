@@ -1,56 +1,81 @@
-*******************************************************************************/
-#include <stdio.h>
-#include<string.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 #include<malloc.h>
-struct Node{
+
+void create();
+void display();
+
+struct Node
+{
     int data;
-    struct Node *next;
+    struct Node *link;
+};
+typedef struct Node node;
+node *start=NULL;
+
+void main()
+{
+    int ch;
+    while(1)
+    {
+        printf("1.Create 2.Display 3.Exit\n");
+        printf("Enter your choice:\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+        case 1:
+            create();
+            break;
+        case 2:
+            display();
+            break;
+        case 3:
+            exit(1);
+        default:
+            printf("Invalid choice\n");
+        }
+    }
 }
-struct node *start = NULL;
-void create(){
-    char ch;
-    struct Node *start,*new_node,*curr;
-    start = (Node*)malloc(sizeof(Node));
-    curr = start;
-    printf("enter element");
+
+void create()
+{
+    int c;
+    node *new,*curr;
+    start=(node *) malloc(sizeof(node));
+    curr=start;
+    printf("Enter element\n");
     scanf("%d",&start->data);
-    while(1){
-        printf("Do you want to add");
-        scanf("%c",&ch);
-        if(ch=='y'){
-            new_node = (Node*)malloc(sizeof(Node));
-                printf("enter element");
-                scanf("%d",&new_node->data);
-                curr->next = new_node;
-                new_node = curr;
-        }else{
-            curr->next = NULL;
+    while(1)
+    {
+        printf("Do you want to add another element(Y/N)\n");
+        scanf("%d",&c);
+        if(c==1)
+        {
+            new=(node *) malloc(sizeof(node));
+            printf("Enter element\n");
+            scanf("%d",&new->data);
+            curr->link = new;
+            curr=new;
+        }
+        else
+        {
+            curr->link=NULL;
             break;
         }
     }
-
-    
 }
-void traversal(){
-    struct Node *ptr;
-    ptr = start;
-    while(ptr!=NULL){
-        printf("%d",ptr->data);
-        ptr = ptr->next;
+void display()
+{
+    node *temp;
+    if(start==NULL)
+    {
+        printf("Linked list is empty\n");
+        return;
     }
-}
-int main() {
-    int choice;
-    printf("enter choice");
-    scanf("%d",&choice);
-    switch(choice){
-        case 1:create();
-        break;
-        case 2:traversal();
-        break;
-        case 3: exit(0);
+    temp=start;
+    while(temp!=NULL)
+    {
+        printf("%d\n",temp->data);
+        temp = temp->link;
     }
-
-    return 0;
 }
