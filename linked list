@@ -1,0 +1,56 @@
+*******************************************************************************/
+#include <stdio.h>
+#include<string.h>
+#include <stdlib.h>
+#include<malloc.h>
+struct Node{
+    int data;
+    struct Node *next;
+}
+struct node *start = NULL;
+void create(){
+    char ch;
+    struct Node *start,*new_node,*curr;
+    start = (Node*)malloc(sizeof(Node));
+    curr = start;
+    printf("enter element");
+    scanf("%d",&start->data);
+    while(1){
+        printf("Do you want to add");
+        scanf("%c",&ch);
+        if(ch=='y'){
+            new_node = (Node*)malloc(sizeof(Node));
+                printf("enter element");
+                scanf("%d",&new_node->data);
+                curr->next = new_node;
+                new_node = curr;
+        }else{
+            curr->next = NULL;
+            break;
+        }
+    }
+
+    
+}
+void traversal(){
+    struct Node *ptr;
+    ptr = start;
+    while(ptr!=NULL){
+        printf("%d",ptr->data);
+        ptr = ptr->next;
+    }
+}
+int main() {
+    int choice;
+    printf("enter choice");
+    scanf("%d",&choice);
+    switch(choice){
+        case 1:create();
+        break;
+        case 2:traversal();
+        break;
+        case 3: exit(0);
+    }
+
+    return 0;
+}
