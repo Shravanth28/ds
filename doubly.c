@@ -60,7 +60,6 @@ void create()
     curr=start;
     printf("Enter element\n");
     scanf("%d",&start->data);
-    ptr = start;
     while(1)
     {
         printf("Do you want to add another element(1/0)\n");
@@ -68,7 +67,7 @@ void create()
         if(c==1)
         {
             new=(node *) malloc(sizeof(node));
-            ptr->link = NULL;
+            curr->link = new;
             new->prev = curr;
             printf("Enter element\n");
             scanf("%d",&new->data);
@@ -102,29 +101,40 @@ void insert_head(){
     temp = start;
     printf("enter element value");
     scanf("%d",&mew->data);
-    if(start=NULL){
-        start = mew;
+    if(start==NULL){
+
         mew->link = NULL;
         mew->prev = NULL;
+        start = mew;
     }
     else{
         mew->link = start;
         mew->prev = NULL;
+        start=mew;
     }
 }
 void delete_val(){
     int val;
-    node *ptr,*prevptr;
+    node *ptr,*prevptr,*temp;
     prevptr = start;
     ptr = start;
+    if(start==NULL){
+        printf("Linked List is Empty");
+        return;
+    }
     printf("enter value to be deleted");
     scanf("%d",&val);
     while(ptr->data!=val){
         prevptr = ptr;
         ptr = ptr->link;
     }
+
     prevptr->link = ptr->link;
     ptr->link->prev = prevptr;
+    printf("\n%d",ptr->data);
     free(ptr);
 
+
 }
+
+
