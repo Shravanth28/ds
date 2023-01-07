@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<malloc.h>
@@ -6,11 +5,12 @@
 void create();
 void display();
 void insert_head();
-void insert_last();
+void delete_val();
+/*void insert_last();
 void insert_val();
 void delete_head();
 void delete_last();
-void delete_val();
+*/
 
 struct Node
 {
@@ -26,7 +26,7 @@ void main()
     int ch;
     while(1)
     {
-        printf("\n1.Create\n2.Display \n3.Insert Head \n4.Insert Last\n5.Insert val\n6.Delete Head\n7.Delete Last\n8.Delete val\n9.Exit");
+        printf("\n1.Create\n2.Display \n3.Insert Head \n4.Delete val\n5.Exit");
         printf("\nEnter your choice:\n");
         scanf("%d",&ch);
         switch(ch)
@@ -41,17 +41,9 @@ void main()
             insert_head();
             break;
         case 4:
-            insert_last();
+            delete_val();
             break;
-        case 5: insert_val();
-            break;
-        case 6: delete_head();
-            break;
-        case 7:delete_last();
-            break;
-        case 8:delete_val();
-            break;
-        case 9:
+        case 5:
             exit(1);
 
         default:
@@ -113,61 +105,12 @@ void insert_head(){
     if(start=NULL){
         start = mew;
         mew->link = NULL;
+        mew->prev = NULL;
     }
     else{
         mew->link = start;
         mew->prev = NULL;
     }
-}
-void insert_last(){
-    node *new,*temp;
-    new = (node *) malloc(sizeof(node));
-    temp = start;
-    printf("enter element value");
-    scanf("%d",&new->data);
-    while(temp->link!=NULL){
-        temp = temp->link;
-    }
-    temp ->link = new;
-    new->link = NULL;
-    new ->prev = temp;
-}
-void insert_val(){
-        node *new,*ptr,*prevptr;
-        int val;
-    new = (node *) malloc(sizeof(node));
-    ptr = start;
-    prevptr = start;
-    printf("enter element value");
-    scanf("%d",&new->data);
-    printf("enter value in between where to enter");
-    scanf("%d",&val);
-    while(prevptr->data !=val){
-        prevptr = ptr;
-        ptr = ptr->link;
-    }
-    prevptr->link = new;
-    new->link = new;
-    ptr->prev = new;
-    new->prev = prevptr;
-}
-void delete_head(){
-    node *ptr;
-    ptr = start;
-    start=start->link;
-    start->prev = NULL;
-    free(ptr);
-}
-void delete_last(){
-    node *ptr,*prevptr;
-    ptr = start;
-    prevptr = start;
-    while(ptr->link != NULL){
-        prevptr = ptr;
-        ptr = ptr->link;
-    }
-    prevptr->link = NULL;
-    free(ptr);
 }
 void delete_val(){
     int val;
